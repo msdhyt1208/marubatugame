@@ -1,0 +1,36 @@
+main {
+  display: flex;
+
+}
+#stage {
+  display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+  background-color: #333;
+    width: 105px;
+    height: 105px;
+}
+#stage .stage-column{
+  flex: 0 0 33%;  
+    /* 1. grow-残り幅をどの割合で分け与えるか */
+    /* 2. shrink-どの割合で縮ませるかを指定するプロパティ */
+    /* 3. basis-アイテムの幅を指定するプロパティ */
+  display: flex;
+    justify-content: space-between;
+}
+#stage .cell {
+  background-color: #ededed;
+    flex: 0 0 33%;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#text{
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+#text #move li{
+  text-align: left;
+  }
