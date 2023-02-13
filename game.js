@@ -16,13 +16,16 @@ for(let id=0;id<9;id++){
     if (game.victory(bord))  return;
     square[id].textContent =tarn % 2 ===0 ? "x" :"o";
     nextPlayer.textContent = `Next player: ${ tarn % 2 ===0 ? "o" :"x" }`; 
-    bord[id] = square[id].textContent 
+    bord[id] = square[id].textContent ;
     const Li = document.createElement('li');
     const Button = document.createElement('button');
-    Button.addEventListener("click",function(){
-      console.log("hoge");
-    }) 
     Button.textContent = `Go to move #${tarn}`;
+    Button.classList.add(tarn);
+    Button.addEventListener("click",function(){
+      for(i=1;i<(tarn-Button.className);i++){
+        console.log(i);
+      }
+    }) 
     Li.appendChild(Button);
     ol.appendChild(Li);
 
