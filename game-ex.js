@@ -21,7 +21,7 @@ for(let cell=0;cell<9;cell++){
     nextPlayer.textContent = `Next player: ${ game.tarn % 2 ===0 ? "〇" :"✕" }`; 
     game.bord[cell] = square[cell].textContent ;
     game.record[game.tarn-1] = cell;   
-    createRemove();
+    if(!game.pvp)createRemove();
     game.tarn++;
     console.log(game.bord);
     if (!game.pvp) return;
@@ -61,7 +61,6 @@ const game = {
     cell = game.computer();
     square[cell].textContent = "✕";
     game.record[game.tarn-1] = cell;   
-    createRemove();
     game.tarn++;
   },
   computer:function(){
