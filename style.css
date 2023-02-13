@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 main {
   display: flex;
 
@@ -10,9 +13,10 @@ main {
   background-color: #333;
     width: 105px;
     height: 105px;
+    padding: 2px;
 }
-#stage .stage-column{
-  flex: 0 0 33%;  
+#stage > .stage-column{
+  flex-basis:32%;  
     /* 1. grow-残り幅をどの割合で分け与えるか */
     /* 2. shrink-どの割合で縮ませるかを指定するプロパティ */
     /* 3. basis-アイテムの幅を指定するプロパティ */
@@ -21,7 +25,7 @@ main {
 }
 #stage .cell {
   background-color: #ededed;
-    flex: 0 0 33%;
+    flex-basis: 32%;
   display: flex;
     align-items: center;
     justify-content: center;
