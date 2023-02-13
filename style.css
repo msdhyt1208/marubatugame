@@ -3,8 +3,13 @@
 }
 main {
   display: flex;
-
+  justify-content: center;
+  padding: 10px;
 }
+body{
+  margin: 0;
+}
+
 #stage {
   display: flex;
     flex-wrap: wrap;
@@ -13,6 +18,7 @@ main {
   background-color: #333;
     width: 105px;
     height: 105px;
+    margin: 30px 0;
     padding: 2px;
 }
 #stage > .stage-column{
@@ -23,18 +29,34 @@ main {
   display: flex;
     justify-content: space-between;
 }
-#stage .cell {
+.stage-column > div {
   background-color: #ededed;
     flex-basis: 32%;
   display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+}
+.stage-column > div:hover{
+  border:solid 1px  #333;
+  background-color: #c9c9c9;
 }
 #text{
   text-align: center;
   margin: 0;
-  padding: 0;
+  padding: 0 10px;
 }
 #text #move li{
   text-align: left;
-  }
+  margin: 10px 0;
+}
+button{
+  height: 30px;
+  width: 150px;
+  font-weight: bold;
+}
+#nextPlayer{
+  text-align: start;
+  padding: 0 40px;
+
+}
