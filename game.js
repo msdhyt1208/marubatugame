@@ -41,33 +41,4 @@ const game = {
     li.innerHTML = "<button>Go to move #1</button>" 
     move.appendChild(li);
   }
-
-
-  
 }
-
-
-
-
-
-
-
-
-
-
-
-// const hoge = [
-//   {
-//     name :"増田",
-//     age :30
-//   },
-//   {
-//     name :"鈴木",
-//     age :25,
-//   },
-//   {
-//     name : "田中",
-//     age:40
-//   }
-// ]
-// console.log(hoge[2].name);
