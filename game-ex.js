@@ -59,6 +59,7 @@ const game = {
   },
   pvc:function(){
     cell = game.computer();
+    game.bord[cell] = "✕";
     square[cell].textContent = "✕";
     game.record[game.tarn-1] = cell;   
     game.tarn++;
@@ -74,27 +75,17 @@ const game = {
       if(game.bord[cell]!=="")  continue;
       game.bord[cell] = "〇";
       if(game.victory(game.bord)){
-        game.bord[cell] = "✕"; 
         return cell;
       } 
       game.bord[cell]="";
     }
-    if(game.bord[4] === '') {
-      game.bord[4] = "✕";
-      return 4;
-    } 
-    else if(game.bord[8]=== "〇"&&game.bord[5]=== ""){
-      game.bord[5] = "✕";
-      return 5;
-    }
+    if(game.bord[4] === '')  return 4;
+
     else {
-      cell = 0;
-      while(cell<game.bord.length){
-        if(game.bord[cell] == "〇") break;
-        cell++;
+      for(let cell =1;cell<game.bord.length;cell++){
+        if(game.bord[cell] == "") return cell;
       }
-      if(cell>7)  cell-=9;
-      game.bord[(cell+2)]="✕";return cell+2;
+      return 0;
     }
   }
 
