@@ -1,13 +1,25 @@
-const square = document.querySelectorAll(".cell");
-const nextPlayer = document.querySelector("p");
+const square =      document.querySelectorAll(".cell");
+const nextPlayer =  document.querySelector("p");
 const ol = document.querySelector("#move");
 let bord =[
   0,0,0,
   0,0,0,
   0,0,0
 ]
+const records = [[...bord]]; 
 let tarn = 1;
 
+
+function buCrAdd (n){
+  return function () {
+    for(let i=0;i<records[n].length;i++){
+      if(records[n][i]===0) square[i].textContent = "";
+      else square[i].textContent = records[n][i];
+      bord[i] = records[n][i];
+    }
+    tarn = n-1;
+  }
+}
 
 
 for(let id=0;id<9;id++){
@@ -16,12 +28,12 @@ for(let id=0;id<9;id++){
     if (game.victory(bord))  return;
     square[id].textContent =tarn % 2 ===0 ? "x" :"o";
     nextPlayer.textContent = `Next player: ${ tarn % 2 ===0 ? "o" :"x" }`; 
-    bord[id] = square[id].textContent 
+    bord[id] = square[id].textContent;
+    records.push([...bord]);
     const Li = document.createElement('li');
     const Button = document.createElement('button');
-    Button.addEventListener("click",function(){
-      console.log("hoge");
-    }) 
+    Button.addEventListener("click",buCrAdd(tarn));
+
     Button.textContent = `Go to move #${tarn}`;
     Li.appendChild(Button);
     ol.appendChild(Li);

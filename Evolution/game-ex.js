@@ -3,13 +3,20 @@ const nextPlayer = document.querySelector("p");
 const ol = document.querySelector("ol");
 const select = document.querySelectorAll("header>button");
 
+const body = document.querySelector("body");
+const crHeader = document.createElement("header");
 
-for(let i = 0;i<select.length;i++){
-  select[i].addEventListener("click",function(){
+body.appendChild(crHeader);
+for(let i= 0;i<2;i++){
+  crHbutton = document.createElement("button");
+  if(i===0) crHbutton.textContent = "対人間";
+  else      crHbutton.textContent = "対ＣＰ";
+  crHbutton.addEventListener("click",function(){
     if(i===0) game.pvp=false;
     console.log(`pvp${game.pvp}`);
-    select[i].parentNode.remove();
+    this.parentNode.remove();
   })
+  crHeader.appendChild(crHbutton);
 }
 
 for(let cell=0;cell<9;cell++){
@@ -21,7 +28,7 @@ for(let cell=0;cell<9;cell++){
     nextPlayer.textContent = `Next player: ${ game.tarn % 2 ===0 ? "〇" :"✕" }`; 
     game.bord[cell] = square[cell].textContent ;
     game.record[game.tarn-1] = cell;   
-    if(!game.pvp)createRemove();
+    if(!game.pvp) createRemove();
     game.tarn++;
     console.log(game.bord);
     if (!game.pvp) return;
@@ -82,7 +89,7 @@ const game = {
     if(game.bord[4] === '')  return 4;
 
     else {
-      for(let cell =1;cell<game.bord.length;cell++){
+      for(let cell =0;cell<game.bord.length;cell++){
         if(game.bord[cell] == "") return cell;
       }
       return 0;
@@ -99,6 +106,7 @@ function createRemove(){
   game.beforeTarn = game.tarn;
   crLi.appendChild(crBtn);
   ol.appendChild(crLi);
+  ol.insertBefore(crLi,ol.children[1]);
   crBtn.textContent = `Go to move #${game.tarn}`;
 
   // buttonのclassをターンにする
