@@ -9,7 +9,6 @@ let bord =[
 const records = [[...bord]]; 
 let tarn = 1;
 
-
 function buCrAdd (n){
   return function () {
     for(let i=0;i<records[n].length;i++){
@@ -27,9 +26,16 @@ for(let id=0;id<9;id++){
     if(square[id].textContent !== "") return;
     if (game.victory(bord))  return;
     square[id].textContent =tarn % 2 ===0 ? "x" :"o";
-    nextPlayer.textContent = `Next player: ${ tarn % 2 ===0 ? "o" :"x" }`; 
     bord[id] = square[id].textContent;
     records.push([...bord]);
+    if(game.victory(bord)){
+      nextPlayer.textContent = `Winnerplayer: ${ tarn % 2 ===0 ? "x" :"o" }`; 
+    }
+    else{
+      nextPlayer.textContent = `Next player: ${ tarn % 2 ===0 ? "o" :"x" }`; 
+    }
+    
+
     const Li = document.createElement('li');
     const Button = document.createElement('button');
     Button.addEventListener("click",buCrAdd(tarn));
@@ -54,9 +60,5 @@ const game = {
     if(bord[0]===bord[4] && bord[4]===bord[8] && bord[8] !== 0) return true; 
     if(bord[2]===bord[4] && bord[4]===bord[6] && bord[6] !== 0) return true;
     return false;
-  },
-  addMove:function(){
-    li.innerHTML = "<button>Go to move #1</button>" 
-    move.appendChild(li);
   }
 }
