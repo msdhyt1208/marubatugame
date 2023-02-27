@@ -7,13 +7,13 @@ let stepNum = 0;
 const history = [[...square]];
 
 
-for(let i=0;i<squareElems.length;i++){
-  squareElems[i].addEventListener("click",function(){
-    if(checkWinner(square)||squareElems[i].textContent) return;
+for(let block=0;block<squareElems.length;block++){
+  squareElems[block].addEventListener("click",function(){
+    if(checkWinner(square)||squareElems[block].textContent) return;
 
     //<div>.text入力
-    square[i]         = stepNum % 2 === 0 ? "o":"x";
-    this.textContent  = stepNum % 2 === 0 ? "o":"x";
+    square[block]     = stepNum % 2 === 0 ? "o":"x";
+    this.textContent  = square[block];
 
     //<div>削除
     for(let m=stepNum+1;m<history.length;m++){
@@ -25,8 +25,8 @@ for(let i=0;i<squareElems.length;i++){
     history.push([...square]);
 
    //nextButton作成
-    crLi = document.createElement("li");
-    crBtn = document.createElement("button");
+    const crLi = document.createElement("li");
+    const crBtn = document.createElement("button");
     crBtn.textContent = `Go to move ${stepNum+1}`;
     crBtn.addEventListener("click",function(){
       const btn = document.querySelectorAll("button");
@@ -39,8 +39,8 @@ for(let i=0;i<squareElems.length;i++){
       square.length = 0;
       square.push(...history[i]) ;
       //現状を表示 
-      for(let i=0;i<square.length;i++){
-        squareElems[i].textContent = square[i];
+      for(let l=0;l<square.length;l++){
+        squareElems[l].textContent = square[l];
       }
       //次の準備
       stepNum = i;
@@ -48,6 +48,8 @@ for(let i=0;i<squareElems.length;i++){
     })
     crLi.append(crBtn);
     olElems.append(crLi);
+
+    //次の準備
     stepNum ++;    
     if(checkWinner(square)){
       nextElem.textContent = `winner ${checkWinner(square)}`
@@ -55,13 +57,11 @@ for(let i=0;i<squareElems.length;i++){
     else{
       nextElem.textContent = `nextplayer ${stepNum % 2 === 0 ? "o":"x"}`
     }
+
+    
   })
 
 }
-
-
-
-
 
 
 
