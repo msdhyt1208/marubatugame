@@ -5,7 +5,7 @@ const olElems = document.querySelector("ol");
 let square = new Array(9).fill("");
 let stepNum = 0;
 const history = [[...square]];
-const pvc = true;
+
 
 for(let block=0;block<squareElems.length;block++){
   squareElems[block].addEventListener("click",function(){
@@ -25,73 +25,44 @@ for(let block=0;block<squareElems.length;block++){
     history.push([...square]);
 
    //nextButton作成
-    if(!pvc){
-      const crLi = document.createElement("li");
-      const crBtn = document.createElement("button");
-      crBtn.textContent = `Go to move ${stepNum+1}`;
-      crBtn.addEventListener("click",function(){
-        const btn = document.querySelectorAll("button");
-        let i = 1; 
-        while(true){
-          if(this === btn[i]) break;
-          i++;
-        }
-        //squareリセット
-        square.length = 0;
-        square.push(...history[i]) ;
-        //現状を表示 
-        for(let l=0;l<square.length;l++){
-          squareElems[l].textContent = square[l];
-        }
-        //次の準備
-        stepNum = i;
-        nextElem.textContent = `nextplayer ${stepNum % 2 === 0 ? "o":"x"}`;
-      })
-      crLi.append(crBtn);
-      olElems.append(crLi);
-      if(checkWinner(square)){
-        nextElem.textContent = `winner ${checkWinner(square)}`
+    const crLi = document.createElement("li");
+    const crBtn = document.createElement("button");
+    crBtn.textContent = `Go to move ${stepNum+1}`;
+    crBtn.addEventListener("click",function(){
+      const btn = document.querySelectorAll("button");
+      let i = 1; 
+      while(true){
+        if(this === btn[i]) break;
+        i++;
       }
-      else{
-        nextElem.textContent = `nextplayer ${stepNum % 2 === 0 ? "o":"x"}`
+      //squareリセット
+      square.length = 0;
+      square.push(...history[i]) ;
+      //現状を表示 
+      for(let l=0;l<square.length;l++){
+        squareElems[l].textContent = square[l];
       }
-      stepNum ++;  
-      return;  
+      //次の準備
+      stepNum = i;
+      nextElem.textContent = `nextplayer ${stepNum % 2 === 0 ? "o":"x"}`;
+    })
+    crLi.append(crBtn);
+    olElems.append(crLi);
 
-    }
     //次の準備
-    nextNum = computer();
-    squareElems[nextNum].textContent = "x";
-    square[nextNum] ="x"
-    history.push([...square]);
+    stepNum ++;    
     if(checkWinner(square)){
       nextElem.textContent = `winner ${checkWinner(square)}`
     }
-    stepNum += 2;    
-
+    else{
+      nextElem.textContent = `nextplayer ${stepNum % 2 === 0 ? "o":"x"}`
+    }
   })
 
 }
 
 
 
-function computer (){
-  for(i=0;i<square.length;i++){
-    if(square[i]) continue;
-    square[i] = "x";
-    if(checkWinner(square)) return i;
-    square[i] = "";
-  }
-  for(i=0;i<square.length;i++){
-    if(square[i]) continue;
-    square[i] = "o";
-    if(checkWinner(square)) return i
-    square[i] = "";
-  }
-  for(i=0;i<square.length;i++){
-    if(!square[i])  return i;
-  }
-}
 function checkWinner(array){
   const lines = [
     [0,1,2],
