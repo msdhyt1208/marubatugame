@@ -30,12 +30,12 @@ for(let block=0;block<squareElems.length;block++){
     crBtn.textContent = `Go to move ${stepNum+1}`;
     crBtn.No = stepNum+1;
     crBtn.addEventListener("click",function(){
-      // const btn = document.querySelectorAll("button");
-      // let i = 1; 
-      // while(true){
-      //   if(this === btn[i]) break;
-      //   i++;
-      // }
+      const btn = document.querySelectorAll("button");
+      let i = 1; 
+      while(true){
+        if(this === btn[i]) break;
+        i++;
+      }
       stepNum = this.No;
       //squareリセット
       square.length = 0;
@@ -45,7 +45,6 @@ for(let block=0;block<squareElems.length;block++){
         squareElems[l].textContent = square[l];
       }
       //次の準備
-      
       nextElem.textContent = `nextplayer ${stepNum % 2 === 0 ? "o":"x"}`;
     })
     crLi.append(crBtn);
