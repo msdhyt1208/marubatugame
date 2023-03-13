@@ -214,9 +214,7 @@
 //   })
 
 
-
-
-let stop = true;
+let stop = false;
 /**
  * 1秒後にランダムに色を変え続ける
  * 
@@ -225,24 +223,27 @@ let stop = true;
  * 最終更新日  2023年03月13日
  * 
  * 備考　　　  課題をループにした(マウスクリックにて動作＆停止)
+ * @return {object} Promise
  */
 function delayColorChengeAuto(){
   return new Promise(function(resolve,reject){
     setTimeout(function(){
       const colorRGB = `rgb(${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)},${Math.floor(Math.random()*255)})`;
-      if(stop)  reject();
+      if(!stop)  reject("stop");
       document.body.style.backgroundColor = colorRGB;
       resolve (colorRGB);
     },1000)
-  })  .then(function(colorRGB){
-        console.log(colorRGB);
-        return delayColorChengeAuto();
-      })
-      .catch((error)=>{
-        console.log("error",error);
-      })
+  }).then(function(colorRGB){
+      console.log(colorRGB);
+      return delayColorChengeAuto();
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
 }
 window.addEventListener("click",()=>{
   stop = stop ? false :true;
-  if(!stop) delayColorChengeAuto();
+  if(!stop) return;
+  console.log("start");
+  delayColorChengeAuto();
 })
