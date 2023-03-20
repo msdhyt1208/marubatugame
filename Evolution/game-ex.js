@@ -2,10 +2,10 @@ const square = document.querySelectorAll(".cell");
 const nextPlayer = document.querySelector("p");
 const ol = document.querySelector("ol");
 const select = document.querySelectorAll("header>button");
-
 const body = document.querySelector("body");
-const crHeader = document.createElement("header");
 
+
+const crHeader = document.createElement("header");
 body.appendChild(crHeader);
 for(let i= 0;i<2;i++){
   crHbutton = document.createElement("button");
